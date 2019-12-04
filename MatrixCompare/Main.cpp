@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include "Matrix.h"
 
 Matrix* readFromFile(std::string matrixName);
@@ -17,7 +18,11 @@ int main()
 
 	// compare the matrices
 	bool areEqual = compareMartices(*A, *B, EPS);
-	std::cout << "Macierze A i B" << (areEqual ? " " : " nie ") << "s¹ równe" << std::endl;
+	// std::cout << "Macierze A i B" << (areEqual ? " " : " nie ") << "s¹ równe" << std::endl;
+	if (areEqual)
+		std::cout << "Macierze s¹ równe" << std::endl;
+	else
+		std::cout << "Macierze s¹ ró¿ne" << std::endl;
 
 	// free the memory
 	delete A, B;
@@ -50,11 +55,11 @@ bool compareMartices(const Matrix& A, const Matrix& B, float eps)
 		return false;
 	}
 
-	for (rsize_t i = 0; i < A.getM(); i++)
+	for (size_t i = 0; i < A.getM(); i++)
 	{
-		for (rsize_t j = 0; j < A.getN(); j++)
+		for (size_t j = 0; j < A.getN(); j++)
 		{
-			if (A.getAt(i, j) - B.getAt(i, j) > eps)
+			if (fabs(fabs(A.getAt(i, j)) - fabs(B.getAt(i, j))) > eps)
 			{
 				return false;
 			}

@@ -15,7 +15,8 @@ Matrix::Matrix(std::string fileName)
 	std::ifstream file;
 	file.open(fileName, std::ifstream::in);
 
-	try {
+	try 
+	{
 		file.exceptions(file.failbit);
 	}
 	catch (const std::ios_base::failure & e)
